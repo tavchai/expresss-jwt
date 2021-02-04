@@ -34,7 +34,7 @@ User.findAll = result => {
 
 User.findByEmail = (email, result) => {
     var sql = "SELECT * FROM users WHERE email = ?";
-    db.query(sql,[email], (err, res) => {
+    db.query(sql, [email], (err, res) => {
         if (err) {
             result(null, err);
         }
@@ -44,5 +44,6 @@ User.findByEmail = (email, result) => {
         result({ email: "email not found" }, null);
     });
 }
+
 
 module.exports = User;
