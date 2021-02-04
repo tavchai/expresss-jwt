@@ -20,4 +20,29 @@ User.create = (newuser, result) => {
     });
 }
 
+User.findAll = result => {
+    var sql = `SELECT * FROM users`;
+    db.query(sql, (err, res) => {
+        if (err) {
+            result(null, err);
+        }
+
+        return result(null, res);
+
+    });
+}
+
+User.findByEmail = (email, result) => {
+    var sql = "SELECT * FROM users WHERE email = ?";
+    db.query(sql,[email], (err, res) => {
+        if (err) {
+            result(null, err);
+        }
+
+        if (res.length) return result(null, res[0]);
+
+        result({ email: "email not found" }, null);
+    });
+}
+
 module.exports = User;
